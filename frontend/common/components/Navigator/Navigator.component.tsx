@@ -18,7 +18,7 @@ export function Navigator(props: NavigatorProps) {
   return (
     <Drawer variant="permanent" {...other}>
       <List disablePadding>
-        <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: "#fff" }}>Simbi</ListItem>
+        <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: "#fff" }}>Teste</ListItem>
         <ListItem sx={{ ...item, ...itemCategory }}>
           <ListItemIcon>
             <HomeIcon />

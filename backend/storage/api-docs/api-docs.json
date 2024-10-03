@@ -111,6 +111,133 @@
                 }
             }
         },
+        "/api/authors/{id}": {
+            "put": {
+                "tags": [
+                    "Authors"
+                ],
+                "summary": "Atualiza as informações de um autor",
+                "description": "Atualiza os dados de um autor existente na API.",
+                "operationId": "updateAuthor",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do autor",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "2234f840-417e-4944-ac9b-e7e6eb06c590"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados do autor que serão atualizados",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "firstName": {
+                                        "type": "string",
+                                        "example": "John"
+                                    },
+                                    "lastName": {
+                                        "type": "string",
+                                        "example": "Doe"
+                                    }
+                                },
+                                "required": [
+                                    "firstName",
+                                    "lastName"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Autor atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "2234f840-417e-4944-ac9b-e7e6eb06c590"
+                                        },
+                                        "firstName": {
+                                            "type": "string",
+                                            "example": "John"
+                                        },
+                                        "lastName": {
+                                            "type": "string",
+                                            "example": "Doe"
+                                        },
+                                        "updatedAt": {
+                                            "type": "string",
+                                            "example": "2024-01-10T14:45:00+00:00"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Requisição com erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Bad Request"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Proibido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Forbidden Error"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthorized Error"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Autor não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Not Found"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Internal server error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/books": {
             "get": {
                 "tags": [
@@ -331,6 +458,130 @@
                 }
             }
         },
+        "/api/loans": {
+            "post": {
+                "tags": [
+                    "Loans"
+                ],
+                "summary": "Cria um novo empréstimo",
+                "description": "Permite criar um novo empréstimo de livro.",
+                "operationId": "createLoan",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "bookId",
+                                    "authorId",
+                                    "userId",
+                                    "loanDate",
+                                    "returnDate"
+                                ],
+                                "properties": {
+                                    "bookId": {
+                                        "type": "string",
+                                        "example": "13b35be6-65a7-4d7f-9ad2-8caaf3c75344"
+                                    },
+                                    "authorId": {
+                                        "type": "string",
+                                        "example": "2234f840-417e-4944-ac9b-e7e6eb06c590"
+                                    },
+                                    "userId": {
+                                        "type": "string",
+                                        "example": "45d02fbd-3436-4e6a-aeae-87e8fbcaf660"
+                                    },
+                                    "loanDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-01-10"
+                                    },
+                                    "returnDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-01-20"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Empréstimo criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "d4e3fa67-5c7b-41f5-a9c2-bd8b26df62b1"
+                                        },
+                                        "bookId": {
+                                            "type": "string",
+                                            "example": "13b35be6-65a7-4d7f-9ad2-8caaf3c75344"
+                                        },
+                                        "authorId": {
+                                            "type": "string",
+                                            "example": "2234f840-417e-4944-ac9b-e7e6eb06c590"
+                                        },
+                                        "userId": {
+                                            "type": "string",
+                                            "example": "45d02fbd-3436-4e6a-aeae-87e8fbcaf660"
+                                        },
+                                        "loanDate": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2024-01-10"
+                                        },
+                                        "returnDate": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2024-01-20"
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Pendente"
+                                        },
+                                        "createdAt": {
+                                            "type": "string",
+                                            "example": "2024-01-10T22:24:26+00:00"
+                                        },
+                                        "updatedAt": {
+                                            "type": "string",
+                                            "example": "2024-01-10T22:24:26+00:00"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Requisição com erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Bad Request"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Internal server error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
         "/health": {
             "get": {
                 "tags": [
@@ -606,6 +857,16 @@
                     }
                 },
                 "type": "object"
+            },
+            "404": {
+                "description": "Empréstimo não encontrado",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Resource Not Found Error"
+                        }
+                    }
+                }
             }
         }
     },
@@ -621,6 +882,10 @@
         {
             "name": "Health Check",
             "description": "Health Check"
+        },
+        {
+            "name": "Loans",
+            "description": "Loans"
         }
     ]
 }

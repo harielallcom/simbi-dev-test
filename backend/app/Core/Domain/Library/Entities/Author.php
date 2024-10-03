@@ -49,6 +49,21 @@ final class Author extends Entity
         return $this->firstName . ' ' . $this->lastName;
     }
 
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+
+    public function getLastName(): string
+    {
+        return $this->lastName;
+    }
+
     /**
      * @return void
      */
